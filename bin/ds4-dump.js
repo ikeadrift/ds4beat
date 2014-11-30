@@ -12,7 +12,7 @@ var fs = require('fs'),
   path = require("path");
 var Speaker = require('speaker');
 
-var app = require('express');
+var app = require('express')();
 var http = require('http').Server(app);
 
 app.get('/', function(req, res) {
