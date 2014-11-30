@@ -11,6 +11,10 @@ var fs = require('fs'),
   path = require("path");
 var Speaker = require('speaker');
 
+var io = require('socket.io')();
+io.on('connection', function(socket){});
+io.listen(3000);
+
 var parseDS4HIDData = ds4.parseDS4HIDData;
 
 var devices = hid.devices();
