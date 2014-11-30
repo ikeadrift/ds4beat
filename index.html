@@ -1,0 +1,51 @@
+<!doct<html>
+
+<head>
+  <title>Ben 'n' Dan's excellent adventure</title>
+  <style type="text/css">
+    #canvas_container {
+      width: 500px;
+      border: 1px solid #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="canvas_container"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+  <script>
+    function getCircleToPath(x, y, r) {
+      var s = "M";
+      s = s + "" + (x) + "," + (y - r) + "A" + r + "," + r + ",0,1,1," +
+        (x - 0.1) + "," + (y - r) + "z";
+      return s;
+    }
+    window.onload = function() {
+      var paper = new Raphael(document.getElementById("canvas_container"),
+        500, 500);
+      var circle = paper.path(getCircleToPath(100, 100, 80));
+      circle.attr({
+        fill: '#9cf',
+        stroke: '#ddd',
+        'stroke-width': 5
+      });
+      sqStr = "M200,100L240,240L120,240Z";
+      var sq = paper.path(sqStr);
+      sq.attr({
+        "stroke-width": 4,
+        fill: "red"
+      });
+      sq.hide();
+      circle.animate({
+        path: sqStr
+      }, 3000, "linear");
+      var socket = io();
+      socket.on("event_name", function(message) {
+        console.log(message);
+      });
+    }
+  </script>
+</body>
+
+</html>
