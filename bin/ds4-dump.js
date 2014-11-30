@@ -59,17 +59,14 @@ var soundSet = 1;
  * 2 = button pressed
  * 3 = button released
  */
-
+var oldState;
 var buttonPressed = (function() {
-	var oldState = null;
+	oldState = null;
 	return function(button, currentState){
 		var output;
 		if (oldState !== null && oldState[button]) {
 			if (currentState[button]) {
-        if (oldState[button] !== 1) {
-          console.log(button + ' held');
-      }
-				
+				//console.log(button + ' held');
 				output = 1;
 			}
 			else {
@@ -100,6 +97,8 @@ hidDevice.on('data', function(buf) {
 	buttonPressed("circle", state);
 	buttonPressed("square", state);
 	buttonPressed("triangle", state);
+	
+	console.log(oldState);
 });
 
 /*if (soundSet==1) {
