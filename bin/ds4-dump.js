@@ -66,13 +66,7 @@ var buttonPressed = (function() {
 		var output;
 		if (oldState !== null && oldState[button]) {
 			if (currentState[button]) {
-<<<<<<< Updated upstream
 				//console.log(button + ' held');
-=======
-        
-          console.log(button + ' held');
-				
->>>>>>> Stashed changes
 				output = 1;
 			}
 			else {
