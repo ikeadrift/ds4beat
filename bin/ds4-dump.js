@@ -29,26 +29,26 @@ var wasCross = false;
 var soundSet = 1;
 
 /*BOOLEAN BUTTONS
-  dPadUp: false,
-  dPadRight: false,
-  dPadDown: false,
-  dPadLeft: false,
-  cross: false,
-  circle: false,
-  square: false,
-  triangle: false,
-  l1: false,
-  l2: false,
-  r1: false,
-  r2: false,
-  l3: false,
-  r3: false,
-  share: false,
-  options: false,
-  trackPadButton: false,
-  psButton: false,
-  trackPadTouch0Active: false,
-  trackPadTouch1Active: false,
+  dPadUp
+  dPadRight
+  dPadDown
+  dPadLeft
+  cross
+  circle
+  square
+  triangle
+  l1
+  l2
+  r1
+  r2
+  l3
+  r3
+  share
+  options
+  trackPadButton
+  psButton
+  trackPadTouch0Active
+  trackPadTouch1Active
 */
 
 var cache = {};
@@ -69,13 +69,36 @@ function buttonPressed(button, state) {
 hidDevice.on('data', function(buf) {
 	var state = parseDS4HIDData(buf.slice(offset));
 	
-	buttonPressed("cross", state);
-	buttonPressed("circle", state);
-	buttonPressed("square", state);
-	//example:
-	if (buttonPressed("triangle", state) == 1) { //press
-		//do something
-	}
+	var cross = buttonPressed("cross", state);
+	var circle = buttonPressed("circle", state);
+	var square = buttonPressed("square", state);
+  var triangle = buttonPressed("triangle", state);
+  var dPadUp = buttonPressed("dPadUp", state);
+  var dPadRight = buttonPressed("dPadRight", state);
+  var dPadDown = buttonPressed("dPadDown", state);
+  var dPadLeft = buttonPressed("dPadLeft", state);
+  var l1 = buttonPressed("l1", state);
+  var l2 = buttonPressed("l2", state);
+  var r1 = buttonPressed("r1", state);
+  var r2 = buttonPressed("r2", state);
+  var l3 = buttonPressed("l3", state);
+  var r3 = buttonPressed("r3", state);
+  var share = buttonPressed("share", state);
+  var options = buttonPressed("options", state);
+  var trackPadButton = buttonPressed("trackPadButton", state);
+  var psButton = buttonPressed("psButton", state);
+  var trackPadTouch0Active = buttonPressed("trackPadTouch0Active", state);
+  var trackPadTouch1Active = buttonPressed("trackPadTouch1Active", state);
+
+  if(cross==2){
+    console.log("cross pressed.");
+  }
+  if(cross==1){
+    console.log("cross released.");
+  }
+
+
+
 });
 
 /*if (soundSet==1) {
