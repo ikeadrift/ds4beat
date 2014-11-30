@@ -95,7 +95,7 @@ hidDevice.on('data', function(buf) {
 	buttonPressed("circle", state);
 	buttonPressed("square", state);
 	buttonPressed("triangle", state);
-}
+});
 	
 /*if(parseDS4HIDData(buf.slice(offset)).cross && !wasCross){
     console.log("X!");
