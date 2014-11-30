@@ -66,7 +66,10 @@ var buttonPressed = (function() {
 		var output;
 		if (oldState !== null && oldState[button]) {
 			if (currentState[button]) {
-				console.log(button + ' held');
+        if (oldState[button] !== 1) {
+          console.log(button + ' held');
+      }
+				
 				output = 1;
 			}
 			else {
@@ -80,7 +83,7 @@ var buttonPressed = (function() {
 				output = 2;
 			}
 			else {
-				console.log(button + ' not down');
+				//console.log(button + ' not down');
 				output = 0;
 			}
 		}
