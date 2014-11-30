@@ -1,5 +1,6 @@
 <!doct<html>
 
+
 <head>
   <title>Ben 'n' Dan's excellent adventure</title>
   <style type="text/css">
@@ -9,6 +10,7 @@
     }
   </style>
 </head>
+
 
 <body>
   <div id="canvas_container"></div>
@@ -33,13 +35,14 @@
       sqStr = "M200,100L240,240L120,240Z";
       var socket = io();
       socket.on("event_name", function(message) {
-    console.log(message);
-          circle.animate({
-        path: sqStr
-      }, 3000, "linear");
+        console.log(message);
+        circle.animate({
+          path: sqStr
+        }, 3000, "linear");
       });
     }
   </script>
 </body>
+
 
 </html>
