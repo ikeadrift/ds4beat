@@ -26,8 +26,6 @@ if (isBluetoothHID(controller)) {
 }
 
 var wasCross = false;
-//var wasL1 = false;
-//var wasR1 = false;
 var soundSet = 1;
 
 /*BOOLEAN BUTTONS
