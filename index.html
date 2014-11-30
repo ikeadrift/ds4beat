@@ -31,18 +31,12 @@
         'stroke-width': 5
       });
       sqStr = "M200,100L240,240L120,240Z";
-      var sq = paper.path(sqStr);
-      sq.attr({
-        "stroke-width": 4,
-        fill: "red"
-      });
-      sq.hide();
-      circle.animate({
-        path: sqStr
-      }, 3000, "linear");
       var socket = io();
       socket.on("event_name", function(message) {
-        console.log(message);
+    console.log(message);
+          circle.animate({
+        path: sqStr
+      }, 3000, "linear");
       });
     }
   </script>
