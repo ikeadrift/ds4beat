@@ -14,9 +14,7 @@ var Speaker = require('speaker');
 var parseDS4HIDData = ds4.parseDS4HIDData;
 
 var devices = hid.devices();
-var controller = _(devices)
-    .filter(isDS4HID)
-    .first();
+var controller = _(devices).filter(isDS4HID).first();
 
 if (!controller) {
     throw new Error('Could not find desired controller.');
@@ -208,19 +206,18 @@ hidDevice.on('data', function(buf) {
 
   var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
   var trackPadTouch0Y = parseDS4HIDData(buf.slice(offset)).trackPadTouch0Y;
-  var trackPadTouch0Y = parseDS4HIDData(buf.slice(offset)).trackPadTouch0Y;
   var r2Analog = parseDS4HIDData(buf.slice(offset)).r2Analog;
 
 //if(r2==3){
     console.log(r2Analog/255);
 
-    if(r2==3){
+    /*AAif(r2==3){
 
-      /*var synthSpeaker = new Speaker({
+      var synthSpeaker = new Speaker({
          channels: 2,          // 2 channels
         bitDepth: 16,         // 16-bit samples
         sampleRate: 44100     // 44,100 Hz sample rate
-      });/*
+      });
       //var sin = T("sin").stdin.pipe(synthSpeaker);
 
 sin.set({freq:880});
@@ -235,10 +232,10 @@ if(!trackPadTouch0Active){
     //console.log("touchpad up");   
   }
 
-
+*/
 });
-
-/*if (soundSet==1) {
+/*
+  if (soundSet==1) {
     if(parseDS4HIDData(buf.slice(offset)).r1){
     soundSet=2;
     console.log(soundSet);
