@@ -55,10 +55,11 @@ var cache = {};
 
 /*
  * 0 = (not down)
- * 1 = press
- * 2 = release
+ * 2 = press
+ * 1 = release
  * 3 = (down)
  */
+
 function buttonPressed(button, state) {
 	var out = (state[button] << 1) | cache[button];
 	cache[button] = state[button];
