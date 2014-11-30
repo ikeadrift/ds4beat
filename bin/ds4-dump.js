@@ -55,10 +55,16 @@ var soundSet = 1;
 
 var cache = {};
 
+/*
+ * 0 = (not down)
+ * 1 = press
+ * 2 = release
+ * 3 = (down)
+ */
 function buttonPressed(button, state) {
-	if (cache[button] !== state[button])
-		console.log(button + ' changed');
+	var out = (state[button] << 1) | cache[button];
 	cache[button] = state[button];
+	return out;
 }
 
 hidDevice.on('data', function(buf) {
@@ -67,7 +73,10 @@ hidDevice.on('data', function(buf) {
 	buttonPressed("cross", state);
 	buttonPressed("circle", state);
 	buttonPressed("square", state);
-	buttonPressed("triangle", state);
+	//example:
+	if (buttonPressed("triangle", state) == 1) { //press
+		//do something
+	}
 });
 
 /*if (soundSet==1) {
