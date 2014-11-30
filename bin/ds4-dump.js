@@ -52,48 +52,49 @@ var soundSet = 1;
   trackPadTouch0Active: false,
   trackPadTouch1Active: false,
 */
-
-hidDevice.on('data', function(buf) {
-	/*
-	 * 0 = button not down
-	 * 1 = button held
-	 * 2 = button pressed
-	 * 3 = button released
-	 */
-	GLOBAL.buttonPressed = (function() {
-		var oldState = null;
-		return function(button){
-			var currentState = parseDS4HIDData(buf.slice(offset));
-			var output;
-			if (oldState !== null && oldState[button]) {
-				if (currentState[button]) {
-					console.log(button + ' held');
-					output = 1;
-				}
-				else {
-					console.log(button + ' released');
-					output = 3;
-				}
+/*
+ * 0 = button not down
+ * 1 = button held
+ * 2 = button pressed
+ * 3 = button released
+ */
+var buttonPressed = (function() {
+	var oldState = null;
+	return function(button, currentState){
+		var output;
+		if (oldState !== null && oldState[button]) {
+			if (currentState[button]) {
+				console.log(button + ' held');
+				output = 1;
 			}
 			else {
-				if (currentState[button]) {
-					console.log(button + ' pressed');
-					ouput = 2;
-				}
-				else {
-					console.log(button + ' not down');
-					ouput = 0;
-				}
+				console.log(button + ' released');
+				output = 3;
 			}
-			oldState = currentState;
-			return output;
 		}
-	})();
+		else {
+			if (currentState[button]) {
+				console.log(button + ' pressed');
+				output = 2;
+			}
+			else {
+				console.log(button + ' not down');
+				output = 0;
+			}
+		}
+		oldState = currentState;
+		return output;
+	}
+})();
+
+hidDevice.on('data', function(buf) {
 	
-	buttonPressed("cross");
-	buttonPressed("circle");
-	buttonPressed("square");
-	buttonPressed("triangle");
+	var state = parseDS4HIDData(buf.slice(offset));
+	
+	buttonPressed("cross", state);
+	buttonPressed("circle", state);
+	buttonPressed("square", state);
+	buttonPressed("triangle", state);
 }
 	
 /*if(parseDS4HIDData(buf.slice(offset)).cross && !wasCross){
