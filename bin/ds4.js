@@ -207,9 +207,10 @@ hidDevice.on('data', function(buf) {
   }
 
   var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
+  var trackPadTouch0Y = parseDS4HIDData(buf.slice(offset)).trackPadTouch0Y;
   if(trackPadTouch0Active){
-    T("sin", {freq:400, mul:trackPadTouch0X}).play(); 
-    console.log(trackPadTouch0X);
+   // T("sin", {freq:400, mul:trackPadTouch0X}).play(); 
+    console.log(trackPadTouch0X+" / "+trackPadTouch0Y);
   }
 
 if(!trackPadTouch0Active){
