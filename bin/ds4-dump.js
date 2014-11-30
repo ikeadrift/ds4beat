@@ -54,102 +54,96 @@ var soundSet = 1;
 */
 
 hidDevice.on('data', function(buf) {
-
-/*
- * @return
- * 0 = button not down
- * 1 = button held
- * 2 = button pressed
- * 3 = button released
- */
-buttonPressed = (function() {
-	var oldState = null;
-	return function(buf, button){
-		var currentState = parseDS4HIDData(buf.slice(offset));
-		var output;
-		if (oldState !== null && oldState[button]) {
-			if (currentState[button]) {
-				console.log(button + ' held');
-				output = 1;
+	/*
+	 * 0 = button not down
+	 * 1 = button held
+	 * 2 = button pressed
+	 * 3 = button released
+	 */
+	GLOBAL.buttonPressed = (function() {
+		var oldState = null;
+		return function(button){
+			var currentState = parseDS4HIDData(buf.slice(offset));
+			var output;
+			if (oldState !== null && oldState[button]) {
+				if (currentState[button]) {
+					console.log(button + ' held');
+					output = 1;
+				}
+				else {
+					console.log(button + ' released');
+					output = 3;
+				}
 			}
 			else {
-				console.log(button + ' released');
-				output = 3;
+				if (currentState[button]) {
+					console.log(button + ' pressed');
+					ouput = 2;
+				}
+				else {
+					console.log(button + ' not down');
+					ouput = 0;
+				}
 			}
+			oldState = currentState;
+			return output;
 		}
-		else {
-			if (currentState[button]) {
-				console.log(button + ' pressed');
-				ouput = 2;
-			}
-			else {
-				console.log(button + ' not down');
-				ouput = 0;
-			}
-		}
-		oldState = currentState;
-		return output;
-	}
-})();
+	})();
+	
+	buttonPressed("cross");
+	buttonPressed("circle");
+	buttonPressed("square");
+	buttonPressed("triangle");
+}
+	
+/*if(parseDS4HIDData(buf.slice(offset)).cross && !wasCross){
+    console.log("X!");
 
-//oldState = parseDS4HIDData(buf.slice(offset));
+    //wasCross = parseDS4HIDData(buf.slice(offset)).cross;
+}
+wasCross = parseDS4HIDData(buf.slice(offset)).cross;*/
 
-buttonPressed("cross");
-buttonPressed("circle");
-buttonPressed("square");
-buttonPressed("triangle");
+/*if (soundSet==1) {
+    if(parseDS4HIDData(buf.slice(offset)).r1){
+    soundSet=2;
+    console.log(soundSet);
 
-    /*if(parseDS4HIDData(buf.slice(offset)).cross && !wasCross){
-    	console.log("X!");
+    //wasCross = parseDS4HIDData(buf.slice(offset)).cross;
+   	 }
+    if(parseDS4HIDData(buf.slice(offset)).l1){
+    soundSet=3;
+    console.log(soundSet);
 
-    	//wasCross = parseDS4HIDData(buf.slice(offset)).cross;
+    //wasCross = parseDS4HIDData(buf.slice(offset)).cross;
     }
-    wasCross = parseDS4HIDData(buf.slice(offset)).cross;*/
+};
 
-    /*if (soundSet==1) {
-    	if(parseDS4HIDData(buf.slice(offset)).r1){
-    	soundSet=2;
-    	console.log(soundSet);
+if (soundSet==2) {
+    if(parseDS4HIDData(buf.slice(offset)).r1){
+    soundSet=3;
+    console.log(soundSet);
 
-    	//wasCross = parseDS4HIDData(buf.slice(offset)).cross;
-   		 }
-    	if(parseDS4HIDData(buf.slice(offset)).l1){
-    	soundSet=3;
-    	console.log(soundSet);
+   	 }
+    if(parseDS4HIDData(buf.slice(offset)).l1){
+    soundSet=1;
+    console.log(soundSet);
 
-    	//wasCross = parseDS4HIDData(buf.slice(offset)).cross;
-    	}
-    };
+    }
+};
 
-    if (soundSet==2) {
-    	if(parseDS4HIDData(buf.slice(offset)).r1){
-    	soundSet=3;
-    	console.log(soundSet);
+if (soundSet==3) {
+    if(parseDS4HIDData(buf.slice(offset)).r1){
+    soundSet=1;
+    console.log(soundSet);
 
-   		 }
-    	if(parseDS4HIDData(buf.slice(offset)).l1){
-    	soundSet=1;
-    	console.log(soundSet);
+   	 }
+    if(parseDS4HIDData(buf.slice(offset)).l1){
+    soundSet=2;
+    console.log(soundSet);
 
-    	}
-    };
-
-    if (soundSet==3) {
-    	if(parseDS4HIDData(buf.slice(offset)).r1){
-    	soundSet=1;
-    	console.log(soundSet);
-
-   		 }
-    	if(parseDS4HIDData(buf.slice(offset)).l1){
-    	soundSet=2;
-    	console.log(soundSet);
-
-    	//wasCross = parseDS4HIDData(buf.slice(offset)).cross;
-    	}
-    };*/
-
-
-});
+    //wasCross = parseDS4HIDData(buf.slice(offset)).cross;
+    }
+};*/
 
 // HIDDesciptor -> Boolean
 function isDS4HID(descriptor) {
