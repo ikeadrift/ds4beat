@@ -7,6 +7,8 @@ var hid = require('node-hid');
 var ds4 = require('..');
 var play = require('play');
 var T = require('timbre');
+var fs = require('fs'),
+  path = require("path");
 //var tone = require('tone');
 
 var parseDS4HIDData = ds4.parseDS4HIDData;
@@ -28,8 +30,32 @@ if (isBluetoothHID(controller)) {
     hidDevice.getFeatureReport(0x04, 66);
 }
 
-var wasCross = false;
-var soundSet = 1;
+
+//var soundSets =
+var setList = [];
+
+var soundSets = fs.readdirSync("./sounds/").length - 1;
+  console.log(soundSets);
+  //soundSets2 = f
+  
+
+
+
+for(var i = 0; i < soundSets; i++) { 
+  console.log("looped!");
+  console.log(i);
+  setList.push(i+1);
+}
+
+var soundSet = setList[0];
+console.log(setList);
+
+
+var wrap = function(max, index) {
+  if (index > 0) return index % max;
+  return max + index;
+};
+
 
 /*BOOLEAN BUTTONS
   dPadUp
@@ -98,11 +124,29 @@ hidDevice.on('data', function(buf) {
   var trackPadTouch1Active = buttonPressed("trackPadTouch1Active", state);
 
   if(r1==2){
-    soundSet=2;
+    //console.log("setlengt length -1" + setList[setList.length - 1]);
+    console.log("old soundset is " + soundSet);
+    if(soundSet ==setList.length){
+      soundSet=setList[0];
+      console.log("new soundset is 1");
+    }
+    else{
+      soundSet=setList[soundSet];
+      console.log("new soundset is " + soundSet);
+    }
+    
   }
 
   if(l1==2){
-    soundSet=1;
+    console.log("old soundset is " + soundSet);
+    if(soundSet==1){
+      soundSet=setList.length;
+      console.log("new soundset is "+setList.length);
+    }else{
+      soundSet=setList[soundSet-2];
+      console.log("new soundset is "+soundSet);
+    }
+    
   }
 
   if(cross==2){
