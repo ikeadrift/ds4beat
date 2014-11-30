@@ -9,7 +9,7 @@ var play = require('play');
 var T = require('timbre');
 var fs = require('fs'),
   path = require("path");
-//var tone = require('tone');
+var Speaker = require('speaker');
 
 var parseDS4HIDData = ds4.parseDS4HIDData;
 
@@ -208,6 +208,24 @@ hidDevice.on('data', function(buf) {
 
   var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
   var trackPadTouch0Y = parseDS4HIDData(buf.slice(offset)).trackPadTouch0Y;
+  var trackPadTouch0Y = parseDS4HIDData(buf.slice(offset)).trackPadTouch0Y;
+  var r2Analog = parseDS4HIDData(buf.slice(offset)).r2Analog;
+
+//if(r2==3){
+    console.log(r2Analog/255);
+
+    if(r2==3){
+
+      /*var synthSpeaker = new Speaker({
+         channels: 2,          // 2 channels
+        bitDepth: 16,         // 16-bit samples
+        sampleRate: 44100     // 44,100 Hz sample rate
+      });/*
+      //var sin = T("sin").stdin.pipe(synthSpeaker);
+
+sin.set({freq:880});
+    }
+//}
   if(trackPadTouch0Active){
    // T("sin", {freq:400, mul:trackPadTouch0X}).play(); 
     console.log(trackPadTouch0X+" / "+trackPadTouch0Y);

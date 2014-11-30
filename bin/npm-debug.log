@@ -1,0 +1,86 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'node-flocking' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'node-flocking', null ]
+6 verbose cache add name=undefined spec="node-flocking" args=["node-flocking",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'node-flocking',
+7 verbose parsed url   path: 'node-flocking',
+7 verbose parsed url   href: 'node-flocking' }
+8 silly lockFile cdc24202-node-flocking node-flocking
+9 verbose lock node-flocking /Users/benzweig/.npm/cdc24202-node-flocking.lock
+10 silly lockFile cdc24202-node-flocking node-flocking
+11 silly lockFile cdc24202-node-flocking node-flocking
+12 verbose addNamed [ 'node-flocking', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile d6b2febe-node-flocking node-flocking@
+15 verbose lock node-flocking@ /Users/benzweig/.npm/d6b2febe-node-flocking.lock
+16 silly addNameRange { name: 'node-flocking', range: '*', hasData: false }
+17 verbose request where is /node-flocking
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 99dca2e6c2c96932
+20 verbose url raw /node-flocking
+21 verbose url resolving [ 'https://registry.npmjs.org/', './node-flocking' ]
+22 verbose url resolved https://registry.npmjs.org/node-flocking
+23 verbose request where is https://registry.npmjs.org/node-flocking
+24 info trying registry request attempt 1 at 20:18:28
+25 http GET https://registry.npmjs.org/node-flocking
+26 http 404 https://registry.npmjs.org/node-flocking
+27 verbose headers { date: 'Sun, 30 Nov 2014 04:18:29 GMT',
+27 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 verbose headers   'content-type': 'application/json',
+27 verbose headers   'cache-control': 'max-age=0',
+27 verbose headers   'content-length': '52',
+27 verbose headers   'accept-ranges': 'bytes',
+27 verbose headers   via: '1.1 varnish',
+27 verbose headers   age: '0',
+27 verbose headers   'x-served-by': 'cache-dfw1829-DFW',
+27 verbose headers   'x-cache': 'MISS',
+27 verbose headers   'x-cache-hits': '0',
+27 verbose headers   'x-timer': 'S1417321109.364603,VS0,VE42',
+27 verbose headers   'keep-alive': 'timeout=10, max=50',
+27 verbose headers   connection: 'Keep-Alive' }
+28 silly registry.get cb [ 404,
+28 silly registry.get   { date: 'Sun, 30 Nov 2014 04:18:29 GMT',
+28 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 silly registry.get     'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=0',
+28 silly registry.get     'content-length': '52',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '0',
+28 silly registry.get     'x-served-by': 'cache-dfw1829-DFW',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1417321109.364603,VS0,VE42',
+28 silly registry.get     'keep-alive': 'timeout=10, max=50',
+28 silly registry.get     connection: 'Keep-Alive' } ]
+29 silly lockFile d6b2febe-node-flocking node-flocking@
+30 silly lockFile d6b2febe-node-flocking node-flocking@
+31 error 404 404 Not Found: node-flocking
+31 error 404
+31 error 404 'node-flocking' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404 It was specified as a dependency of 'ds4'
+31 error 404
+31 error 404 Maybe try 'npm search flocking'
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Darwin 14.0.0
+33 error command "node" "/usr/local/bin/npm" "install" "node-flocking"
+34 error cwd /Users/benzweig/ds4fun/bin
+35 error node -v v0.10.33
+36 error npm -v 1.4.28
+37 error code E404
+38 verbose exit [ 1, true ]
