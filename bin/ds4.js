@@ -30,8 +30,6 @@ var wasCross = false;
 //var wasR1 = false;
 var soundSet = 1;
 
-var alreadyPressed = false;
-
 /*BOOLEAN BUTTONS
   dPadUp: false,
   dPadRight: false,
@@ -80,7 +78,6 @@ var buttonPressed = (function() {
 			else {
 				console.log(button + ' released');
 				output = 3;
-        alreadyPressed = false;
 			}
 		}
 		else {
