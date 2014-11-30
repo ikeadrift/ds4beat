@@ -53,52 +53,21 @@ var soundSet = 1;
   trackPadTouch1Active: false,
 */
 
-/*
- * 0 = button not down
- * 1 = button held
- * 2 = button pressed
- * 3 = button released
- */
-var oldState;
-var buttonPressed = (function() {
-	oldState = null;
-	return function(button, currentState){
-		var output;
-		if (oldState !== null && oldState[button]) {
-			if (currentState[button]) {
-				//console.log(button + ' held');
-				output = 1;
-			}
-			else {
-				console.log(button + ' released');
-				output = 3;
-			}
-		}
-		else {
-			if (currentState[button]) {
-				console.log(button + ' pressed');
-				output = 2;
-			}
-			else {
-				//console.log(button + ' not down');
-				output = 0;
-			}
-		}
-		oldState = currentState;
-		return output;
-	}
-})();
+var cache = {};
+
+function buttonPressed(button, state) {
+	if (cache[button] !== state[button])
+		console.log(button + ' changed');
+	cache[button] = state[button];
+}
 
 hidDevice.on('data', function(buf) {
-	
 	var state = parseDS4HIDData(buf.slice(offset));
 	
 	buttonPressed("cross", state);
 	buttonPressed("circle", state);
 	buttonPressed("square", state);
 	buttonPressed("triangle", state);
-	
-	console.log(oldState);
 });
 
 /*if (soundSet==1) {
