@@ -97,6 +97,11 @@ hidDevice.on('data', function(buf) {
     console.log("cross released.");
   }
 
+  var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
+  if(trackPadTouch0Active){
+      console.log(trackPadTouch0X);
+  }
+
 
 
 });
