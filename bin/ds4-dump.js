@@ -33,6 +33,7 @@ if (isBluetoothHID(controller)) {
 
 //var soundSets =
 var setList = [];
+var trackSelected = 1;
 
 var soundSets = fs.readdirSync("./sounds/").length - 1;
   console.log(soundSets);
@@ -49,12 +50,6 @@ for(var i = 0; i < soundSets; i++) {
 
 var soundSet = setList[0];
 console.log(setList);
-
-
-var wrap = function(max, index) {
-  if (index > 0) return index % max;
-  return max + index;
-};
 
 
 /*BOOLEAN BUTTONS
@@ -97,6 +92,23 @@ function buttonPressed(button, state) {
 
 function playSound(soundNumber, set){
   play.sound('./sounds/'+set+'/'+soundNumber+".wav");
+}
+
+function trackSelect(track){
+  /*if (track == trackSelected){
+    if (trackSelected[mutedTrack]=true) {
+      trackSelected[mutedTrack]=false;
+      console.log("track "+track+" unmuted.");
+    }
+    else{
+      trackSelected[mutedTrack] = true;
+      console.log("track "+track+" muted.");
+    }
+      
+  }
+  else{*/
+    trackSelected=track;
+    console.log("track "+track+" selected.");
 }
 
 hidDevice.on('data', function(buf) {
@@ -179,6 +191,19 @@ hidDevice.on('data', function(buf) {
   }
   if(square==1){
     console.log("triangle released.");
+  }
+
+  if(dPadDown==2){
+      trackSelect("1");
+  }
+  if(dPadRight==2){
+      trackSelect("2");
+  }
+  if(dPadUp==2){
+      trackSelect("3");
+  }
+  if(dPadLeft==2){
+      trackSelect("4");
   }
 
   var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
