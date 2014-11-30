@@ -5,6 +5,9 @@
 var _ = require('lodash');
 var hid = require('node-hid');
 var ds4 = require('..');
+var play = require('play');
+var T = require('timbre');
+//var tone = require('tone');
 
 var parseDS4HIDData = ds4.parseDS4HIDData;
 
@@ -66,6 +69,10 @@ function buttonPressed(button, state) {
 	return out;
 }
 
+function playSound(soundNumber, set){
+  play.sound('./sounds/'+set+'/'+soundNumber+".wav");
+}
+
 hidDevice.on('data', function(buf) {
 	var state = parseDS4HIDData(buf.slice(offset));
 	
@@ -90,18 +97,55 @@ hidDevice.on('data', function(buf) {
   var trackPadTouch0Active = buttonPressed("trackPadTouch0Active", state);
   var trackPadTouch1Active = buttonPressed("trackPadTouch1Active", state);
 
+  if(r1==2){
+    soundSet=2;
+  }
+
+  if(l1==2){
+    soundSet=1;
+  }
+
   if(cross==2){
     console.log("cross pressed.");
+    playSound(1,soundSet);
   }
   if(cross==1){
     console.log("cross released.");
   }
 
-  var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
-  if(trackPadTouch0Active){
-      console.log(trackPadTouch0X);
+  if(circle==2){
+    console.log("circle pressed.");
+    playSound(2,soundSet);
+  }
+  if(circle==1){
+    console.log("cross released.");
   }
 
+  if(triangle==2){
+    console.log("square pressed.");
+    playSound(3,soundSet);
+  }
+  if(triangle==1){
+    console.log("square released.");
+  }
+
+  if(square==2){
+    console.log("triangle pressed.");
+    playSound(4,soundSet);
+  }
+  if(square==1){
+    console.log("triangle released.");
+  }
+
+  var trackPadTouch0X = parseDS4HIDData(buf.slice(offset)).trackPadTouch0X;
+  if(trackPadTouch0Active){
+    T("sin", {freq:400, mul:trackPadTouch0X}).play(); 
+    console.log(trackPadTouch0X);
+  }
+
+if(!trackPadTouch0Active){
+    //console.log("touchpad up");   
+  }
 
 
 });
