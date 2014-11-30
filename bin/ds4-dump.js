@@ -54,35 +54,43 @@ var soundSet = 1;
 */
 
 hidDevice.on('data', function(buf) {
-    //console.log(parseDS4HIDData(buf.slice(offset)).cross);
-function resetOldState(){
 
-	oldState["cross"] = false;
-	oldState["circle"] = false;
-	oldState["square"] = false;
-	oldState["triangle"] = false;
-}    
-
-	var oldState = {};
-
-
-function buttonPressed(button){
-	//console.log(oldState);
-	//console.log(parseDS4HIDData(buf.slice(offset)));
-	if(parseDS4HIDData(buf.slice(offset))[button] && !oldState[button]){
-		console.log("new "+button+ " press!");
-		oldState[button]=parseDS4HIDData(buf.slice(offset))[button];
-		return true;
-	} else if(parseDS4HIDData(buf.slice(offset))[button] && oldState[button]){
-		console.log(button + " is being held")
-		oldState[button]=parseDS4HIDData(buf.slice(offset))[button];
-		return false;
-	} else{
-		oldState[button]=parseDS4HIDData(buf.slice(offset))[button];
-		return false;
+/*
+ * @return
+ * 0 = button not down
+ * 1 = button held
+ * 2 = button pressed
+ * 3 = button released
+ */
+buttonPressed = (function() {
+	var oldState = null;
+	return function(buf, button){
+		var currentState = parseDS4HIDData(buf.slice(offset));
+		var output;
+		if (oldState !== null && oldState[button]) {
+			if (currentState[button]) {
+				console.log(button + ' held');
+				output = 1;
+			}
+			else {
+				console.log(button + ' released');
+				output = 3;
+			}
+		}
+		else {
+			if (currentState[button]) {
+				console.log(button + ' pressed');
+				ouput = 2;
+			}
+			else {
+				console.log(button + ' not down');
+				ouput = 0;
+			}
+		}
+		oldState = currentState;
+		return output;
 	}
-
-}
+})();
 
 //oldState = parseDS4HIDData(buf.slice(offset));
 
