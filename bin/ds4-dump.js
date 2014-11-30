@@ -52,12 +52,14 @@ var soundSet = 1;
   trackPadTouch0Active: false,
   trackPadTouch1Active: false,
 */
+
 /*
  * 0 = button not down
  * 1 = button held
  * 2 = button pressed
  * 3 = button released
  */
+
 var buttonPressed = (function() {
 	var oldState = null;
 	return function(button, currentState){
@@ -96,13 +98,6 @@ hidDevice.on('data', function(buf) {
 	buttonPressed("square", state);
 	buttonPressed("triangle", state);
 });
-	
-/*if(parseDS4HIDData(buf.slice(offset)).cross && !wasCross){
-    console.log("X!");
-
-    //wasCross = parseDS4HIDData(buf.slice(offset)).cross;
-}
-wasCross = parseDS4HIDData(buf.slice(offset)).cross;*/
 
 /*if (soundSet==1) {
     if(parseDS4HIDData(buf.slice(offset)).r1){
