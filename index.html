@@ -26,19 +26,29 @@
     window.onload = function() {
       var paper = new Raphael(document.getElementById("canvas_container"),
         500, 500);
-      var circle = paper.path(getCircleToPath(100, 100, 80));
-      circle.attr({
+      var rect = paper.rect(0, 0, 500, 500);
+      rect.attr({
         fill: '#9cf',
         stroke: '#ddd',
         'stroke-width': 5
       });
       sqStr = "M200,100L240,240L120,240Z";
       var socket = io();
-      socket.on("event_name", function(message) {
+      socket.on("color_1", function(message) {
         console.log(message);
-        circle.animate({
-          path: sqStr
-        }, 3000, "linear");
+        rect.attr("fill", "#E8E8E8")
+      });
+      socket.on("color_2", function(message) {
+        console.log(message);
+        rect.attr("fill", "#FF0000")
+      });
+      socket.on("color_3", function(message) {
+        console.log(message);
+        rect.attr("fill", "#00D921")
+      });
+      socket.on("color_4", function(message) {
+        console.log(message);
+        rect.attr("fill", "#FF69FC")
       });
     }
   </script>

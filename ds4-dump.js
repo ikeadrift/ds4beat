@@ -173,7 +173,7 @@ io.on('connection', function(socket) {
     if (cross == 2) {
       console.log("cross pressed.");
       playSound(1, soundSet);
-      socket.emit("event_name", "LOL NERD");
+      socket.emit("color_1", "LOL NERD");
     }
     if (cross == 1) {
       console.log("cross released.");
@@ -182,6 +182,7 @@ io.on('connection', function(socket) {
     if (circle == 2) {
       console.log("circle pressed.");
       playSound(2, soundSet);
+      socket.emit("color_2", "LOL NERD");
     }
     if (circle == 1) {
       console.log("cross released.");
@@ -190,17 +191,19 @@ io.on('connection', function(socket) {
     if (triangle == 2) {
       console.log("square pressed.");
       playSound(3, soundSet);
+      socket.emit("color_3", "LOL NERD");
     }
     if (triangle == 1) {
-      console.log("square released.");
+      console.log("triangle released.");
     }
 
     if (square == 2) {
       console.log("triangle pressed.");
       playSound(4, soundSet);
+      socket.emit("color_4", "LOL NERD");
     }
     if (square == 1) {
-      console.log("triangle released.");
+      console.log("square released.");
     }
 
     if (dPadDown == 2) {
@@ -221,7 +224,7 @@ io.on('connection', function(socket) {
     var r2Analog = parseDS4HIDData(buf.slice(offset)).r2Analog;
 
     //if(r2==3){
-    console.log(r2Analog / 255);
+    //console.log(r2Analog / 255);
 
     /*AAif(r2==3){
 
