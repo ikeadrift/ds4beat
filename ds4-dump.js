@@ -19,9 +19,9 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-var io = require('socket.io')(http);
+/*var io = require('socket.io')(http);
 io.on('connection', function(socket) {
-  console.log('a user connected');
+  console.log('a user connected');*/
 
   var parseDS4HIDData = ds4.parseDS4HIDData;
 
@@ -103,18 +103,6 @@ io.on('connection', function(socket) {
 
 
   function trackSelect(track) {
-    /*if (track == trackSelected){
-    if (trackSelected[mutedTrack]=true) {
-      trackSelected[mutedTrack]=false;
-      console.log("track "+track+" unmuted.");
-    }
-    else{
-      trackSelected[mutedTrack] = true;
-      console.log("track "+track+" muted.");
-    }
-
-  }
-  else{*/
     trackSelected = track;
     console.log("track " + track + " selected.");
   }
@@ -173,7 +161,7 @@ io.on('connection', function(socket) {
     if (cross == 2) {
       console.log("cross pressed.");
       playSound(1, soundSet);
-      socket.emit("color_1", "LOL NERD");
+      //socket.emit("color_1", "LOL NERD");
     }
     if (cross == 1) {
       console.log("cross released.");
@@ -182,7 +170,7 @@ io.on('connection', function(socket) {
     if (circle == 2) {
       console.log("circle pressed.");
       playSound(2, soundSet);
-      socket.emit("color_2", "LOL NERD");
+      //socket.emit("color_2", "LOL NERD");
     }
     if (circle == 1) {
       console.log("cross released.");
@@ -191,7 +179,7 @@ io.on('connection', function(socket) {
     if (triangle == 2) {
       console.log("square pressed.");
       playSound(3, soundSet);
-      socket.emit("color_3", "LOL NERD");
+      //socket.emit("color_3", "LOL NERD");
     }
     if (triangle == 1) {
       console.log("triangle released.");
@@ -200,7 +188,7 @@ io.on('connection', function(socket) {
     if (square == 2) {
       console.log("triangle pressed.");
       playSound(4, soundSet);
-      socket.emit("color_4", "LOL NERD");
+      //socket.emit("color_4", "LOL NERD");
     }
     if (square == 1) {
       console.log("square released.");
@@ -249,8 +237,6 @@ if(!trackPadTouch0Active){
 
 */
   });
-
-});
 
 /*
   if (soundSet==1) {

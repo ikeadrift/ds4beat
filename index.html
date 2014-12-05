@@ -7,6 +7,7 @@
     #canvas_container {
       width: 500px;
       border: 1px solid #aaa;
+
     }
   </style>
 </head>
@@ -24,13 +25,16 @@
       return s;
     }
     window.onload = function() {
+      
       var paper = new Raphael(document.getElementById("canvas_container"),
         500, 500);
       var rect = paper.rect(0, 0, 500, 500);
+
       rect.attr({
         fill: '#9cf',
         stroke: '#ddd',
         'stroke-width': 5
+
       });
       sqStr = "M200,100L240,240L120,240Z";
       var socket = io();
